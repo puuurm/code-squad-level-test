@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var myTableView: UITableView!
+
     var albulmArray = [Album]()
     let jsonString = """
         [{\"title\":\"초록\",\"image\":\"01.jpg\",\"date\":\"20150116\"},
@@ -26,6 +28,8 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        myTableView.delegate = self
+        myTableView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
         if let data = jsonString.data(using: .utf8, allowLossyConversion: true) {
             do {
@@ -51,5 +55,26 @@ class ViewController: UIViewController {
     }
 
 
+}
+
+extension ViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return albulmArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
+        let row = indexPath.row
+        cell.backgroundImage.image = albulmArray[row].image
+        cell.nameLabel.text = albulmArray[row].title
+        cell.dateLabel.text = albulmArray[row].date
+        return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
 }
 
