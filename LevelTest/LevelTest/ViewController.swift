@@ -76,5 +76,14 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         return 80
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        self.navigationController?.pushViewController(detailViewController, animated: true)
+        detailViewController.navigationItem.title = "Photo"
+        let selectedAlbum = albulmArray[indexPath.row]
+        detailViewController.album = selectedAlbum
+    }
+
+    
 }
 

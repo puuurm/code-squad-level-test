@@ -14,6 +14,7 @@
 		C952DBAB1F8F207F00F4DF45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C952DBA91F8F207F00F4DF45 /* LaunchScreen.storyboard */; };
 		C952DBB31F8F221E00F4DF45 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952DBB21F8F221E00F4DF45 /* Album.swift */; };
 		C952DBB51F8F24C100F4DF45 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952DBB41F8F24C100F4DF45 /* TableViewCell.swift */; };
+		C952DBB71F8F2FF700F4DF45 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C952DBB61F8F2FF700F4DF45 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		C952DBAC1F8F207F00F4DF45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C952DBB21F8F221E00F4DF45 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		C952DBB41F8F24C100F4DF45 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		C952DBB61F8F2FF700F4DF45 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				C952DBA01F8F207E00F4DF45 /* AppDelegate.swift */,
 				C952DBB21F8F221E00F4DF45 /* Album.swift */,
 				C952DBA21F8F207E00F4DF45 /* ViewController.swift */,
+				C952DBB61F8F2FF700F4DF45 /* DetailViewController.swift */,
 				C952DBB41F8F24C100F4DF45 /* TableViewCell.swift */,
 				C952DBA41F8F207E00F4DF45 /* Main.storyboard */,
 				C952DBA71F8F207F00F4DF45 /* Assets.xcassets */,
@@ -144,6 +147,7 @@
 			files = (
 				C952DBA31F8F207E00F4DF45 /* ViewController.swift in Sources */,
 				C952DBB51F8F24C100F4DF45 /* TableViewCell.swift in Sources */,
+				C952DBB71F8F2FF700F4DF45 /* DetailViewController.swift in Sources */,
 				C952DBA11F8F207E00F4DF45 /* AppDelegate.swift in Sources */,
 				C952DBB31F8F221E00F4DF45 /* Album.swift in Sources */,
 			);
