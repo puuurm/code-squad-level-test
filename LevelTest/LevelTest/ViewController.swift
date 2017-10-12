@@ -11,7 +11,9 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet var myTableView: UITableView!
-
+    var yearArray = [String]()
+    var yearCellNum = [Int]()
+    
     var albulmArray = [Album]()
     let jsonString = """
         [{\"title\":\"초록\",\"image\":\"01.jpg\",\"date\":\"20150116\"},
@@ -25,7 +27,7 @@ class ViewController: UIViewController {
         {\"title\":\"흑백\",\"image\":\"09.jpg\",\"date\":\"20150102\"},
         {\"title\":\"나비\",\"image\":\"10.jpg\",\"date\":\"20141225\"}]
     """
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         myTableView.delegate = self
@@ -39,35 +41,75 @@ class ViewController: UIViewController {
                         albulmArray.append(currentObj!)
                     }
                     albulmArray = albulmArray.sorted(by: {return $0.title < $1.title})
-                                    } else {
+                } else {
                     print("caanot create a object from the JSON")
                 }
             } catch { print("Error is: \(error)") }
         } else {
             print("cannot make data")
         }
-
+        albulmArray = albulmArray.sorted(by: {return $0.date < $1.date})
+        
+        var yearSet: Set<String> = []
+        for data in albulmArray {
+            let yeardata = filterYear(date: data.date)
+            yearSet.insert(String(yeardata))
+        }
+        yearArray = yearSet.sorted(by: {$0 < $1})
+        
+        for idx in 0..<yearArray.count {
+            yearCellNum.append(0)
+            for album in albulmArray {
+                if yearArray[idx] != filterYear(date: album.date) {continue}
+                yearCellNum[idx] += 1
+            }
+        }
+        
+        
     }
-
+    
+    func filterYear(date: String) -> String {
+        let index = date.index(date.startIndex, offsetBy: 5)
+        let range = ..<date.index(before: index)
+        return String(date[range])
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
+    
+    
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albulmArray.count
+        return yearCellNum[section]
     }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return yearArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return yearArray[section]
+    }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell") as! TableViewCell
+        let section = indexPath.section
         let row = indexPath.row
-        cell.backgroundImage.image = albulmArray[row].image
-        cell.nameLabel.text = albulmArray[row].title
-        cell.dateLabel.text = albulmArray[row].date
+        if section == 0 {
+            cell.backgroundImage.image = albulmArray[row].image
+            cell.nameLabel.text = albulmArray[row].title
+            cell.dateLabel.text = albulmArray[row].date
+        } else {
+            let currentAlbum = albulmArray[section * yearCellNum[section-1]+row]
+            cell.backgroundImage.image = currentAlbum.image
+            cell.nameLabel.text = currentAlbum.title
+            cell.dateLabel.text = currentAlbum.date
+        }
         return cell
     }
     
@@ -83,7 +125,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
         let selectedAlbum = albulmArray[indexPath.row]
         detailViewController.album = selectedAlbum
     }
-
+    
     
 }
-
